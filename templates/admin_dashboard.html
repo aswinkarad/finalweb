@@ -1,0 +1,139 @@
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Admin Dashboard</h1>
+
+    <!-- Projects Section -->
+    <div class="card mb-4 shadow">
+        <div class="card-header bg-info text-white">
+            <h3>Projects</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for project in projects %}
+                    <tr>
+                        <td>{{ project.name }}</td>
+                        <td>{{ project.description|truncatechars:50 }}</td>
+                        <td>{{ project.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Categories Section -->
+    <div class="card mb-4 shadow">
+        <div class="card-header bg-success text-white">
+            <h3>Categories</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                    <tr>
+                        <td>{{ category.name }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Posts Section -->
+    <div class="card mb-4 shadow">
+        <div class="card-header bg-warning text-white">
+            <h3>Posts</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                    <tr>
+                        <td>{{ post.name }}</td>
+                        <td>{{ post.category.name }}</td>
+                        <td>{{ post.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="card mb-4 shadow">
+        <div class="card-header bg-danger text-white">
+            <h3>Comments</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Content</th>
+                        <th>User</th>
+                        <th>Post</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for comment in comments %}
+                    <tr>
+                        <td>{{ comment.content|truncatechars:50 }}</td>
+                        <td>{{ comment.user.username }}</td>
+                        <td>{{ comment.post.name }}</td>
+                        <td>{{ comment.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Ratings Section -->
+    <div class="card mb-4 shadow">
+        <div class="card-header bg-secondary text-white">
+            <h3>Ratings</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Stars</th>
+                        <th>User</th>
+                        <th>Post</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rating in ratings %}
+                    <tr>
+                        <td>{{ rating.stars }}</td>
+                        <td>{{ rating.user.username }}</td>
+                        <td>{{ rating.post.name }}</td>
+                        <td>{{ rating.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

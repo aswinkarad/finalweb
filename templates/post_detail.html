@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.name }} - Post Detail</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ff00;
+            --bg-dark: #1a1a1a;
+            --text: #e0e0e0;
+            --card-bg: #242424;
+            --shadow-color: rgba(0, 255, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            border: 1px solid rgba(0, 255, 0, 0.1);
+        }
+
+        /* Post Header Styles */
+        .post-header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+            padding-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .sub-heading {
+            font-size: 1.2rem;
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .notes {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text);
+            opacity: 0.7;
+        }
+
+        .meta-item i {
+            color: var(--primary);
+        }
+
+        /* Comments Section */
+        .comments-section {
+            margin-top: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .comment {
+            background: rgba(0, 255, 0, 0.05);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .comment-date {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .comment-content {
+            margin-bottom: 1rem;
+        }
+
+        /* Forms */
+        .form-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 255, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        textarea, select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 255, 0, 0.05);
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--shadow-color);
+        }
+
+        select option {
+            background: var(--card-bg);
+            color: var(--text);
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .btn-delete {
+            background: #ff4444;
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .login-prompt {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 255, 0, 0.05);
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .login-prompt a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-prompt a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Post Header -->
+        <div class="post-header">
+            <h1>{{ post.name }}</h1>
+            <p class="sub-heading">{{ post.sub_heading }}</p>
+            <div class="notes">{{ post.notes }}</div>
+            <div class="meta">
+                <span class="meta-item">
+                    <i class="fas fa-folder"></i>
+                    {{ post.category.name }}
+                </span>
+                <span class="meta-item">
+                    <i class="fas fa-star"></i>
+                    {{ post.avg_rating|default:"No ratings yet" }}
+                </span>
+                <span class="meta-item">
+                    <i class="fas fa-comments"></i>
+                    {{ post.comment_count }} Comments
+                </span>
+                
+            </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="comments-section">
+            <h2 class="section-title">Comments</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <div class="comment-header">
+                        <span class="comment-author">{{ comment.user.username }}</span>
+                        <span class="comment-date">{{ comment.created_at }}</span>
+                    </div>
+                    <p class="comment-content">{{ comment.content }}</p>
+                    {% if request.user == comment.user or request.user.is_staff %}
+                        <form action="{% url 'delete_comment' comment.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-delete">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p>No comments yet. Be the first to comment!</p>
+            {% endfor %}
+        </div>
+
+      
+            <div class="form-section">
+                <h2 class="section-title">Add a Comment</h2>
+                <form method="post" action="{% url 'add_comment' post.id %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <textarea name="content" placeholder="Share your thoughts..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">
+                        <i class="fas fa-paper-plane"></i> Submit Comment
+                    </button>
+                </form>
+            </div>
+
+            <!-- Rate Post Form -->
+            <div class="form-section">
+                <h2 class="section-title">Rate this Post</h2>
+                <form method="post" action="{% url 'rate_post' post.id %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <select name="stars" required>
+                            <option value="">Select rating</option>
+                            <option value="5">★★★★★ Excellent</option>
+                            <option value="4">★★★★☆ Very Good</option>
+                            <option value="3">★★★☆☆ Good</option>
+                            <option value="2">★★☆☆☆ Fair</option>
+                            <option value="1">★☆☆☆☆ Poor</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">
+                        <i class="fas fa-star"></i> Submit Rating
+                    </button>
+                </form>
+            </div>
+      
+          
+ 
+    </div>
+</body>
+</html>

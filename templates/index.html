@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aswinkl71 - Python Django & Cybersecurity</title>
+    <meta name="description" content="Aswinkl71 - Expert in Python Django development, cybersecurity, and live Kerala updates including lottery results, gold rates, and rubber rates.">
+    <meta name="keywords" content="Aswinkl71, Python Django, cybersecurity, Kerala lottery, gold rates, rubber rates, live updates">
+    <meta name="author" content="Aswinkl71">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.aswinkl71.com/">
+
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #00ffcc;
+            --secondary: #ff00ff;
+            --bg-dark: #0a0e17;
+            --text: #f0f0f0;
+            --card-bg: #1e2839;
+            --game-bg: #2a3447;
+            --shadow: 0 10px 40px rgba(0, 255, 204, 0.25);
+            --glow: 0 0 20px rgba(0, 255, 204, 0.6);
+            --transition: all 0.4s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, var(--bg-dark), #1b2536);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.9;
+        }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2.5rem; }
+
+        .navbar {
+            background: rgba(10, 14, 23, 0.95);
+            padding: 1.8rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow);
+            border-bottom: 2px solid rgba(0, 255, 204, 0.15);
+        }
+
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo {
+            color: var(--primary);
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: var(--glow);
+            transition: var(--transition);
+        }
+
+        .logo:hover { color: var(--secondary); transform: scale(1.05); }
+
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+        .nav-item a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 0.7rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: var(--transition);
+            border-radius: 10px;
+        }
+
+        .nav-item a:hover {
+            color: var(--primary);
+            background: rgba(0, 255, 204, 0.15);
+            transform: translateY(-5px);
+            box-shadow: var(--glow);
+        }
+
+        .nav-toggle { display: none; background: none; border: none; color: var(--primary); font-size: 2rem; cursor: pointer; transition: var(--transition); }
+
+        .nav-toggle:hover { color: var(--secondary); transform: rotate(90deg); }
+
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--bg-dark);
+                flex-direction: column;
+                padding: 1rem;
+                transition: left 0.5s ease;
+                box-shadow: var(--shadow);
+            }
+            .nav-links.active { left: 0; }
+            .nav-item a { font-size: 1.1rem; padding: 0.6rem 1rem; }
+            .container { padding: 0 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .logo { font-size: 1.5rem; }
+            .nav-toggle { font-size: 1.5rem; }
+            .nav-links { top: 60px; }
+            .nav-item a { font-size: 1rem; }
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem 0;
+            position: relative;
+            z-index: 1;
+            background: radial-gradient(circle at center, rgba(0, 255, 204, 0.1), transparent);
+        }
+
+        .terminal-window {
+            background: linear-gradient(145deg, var(--card-bg), #2e3950);
+            width: 100%;
+            max-width: 1000px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.6s ease;
+            border: 2px solid rgba(0, 255, 204, 0.3);
+        }
+
+        .terminal-window:hover { transform: scale(1.03); box-shadow: var(--shadow), var(--glow); }
+
+        .terminal-header { background: var(--game-bg); padding: 1.2rem; display: flex; align-items: center; gap: 1rem; border-bottom: 2px solid rgba(0, 255, 204, 0.15); }
+
+        .terminal-button { width: 16px; height: 16px; border-radius: 50%; transition: var(--transition); }
+
+        .terminal-button:hover { transform: scale(1.3); box-shadow: var(--glow); }
+
+        .close { background: #ff5f56; }
+        .minimize { background: #ffbd2e; }
+        .maximize { background: #27c93f; }
+
+        .terminal-title { color: var(--primary); font-family: 'Courier New', monospace; font-size: 1.4rem; margin-left: 0.8rem; text-shadow: var(--glow); }
+
+        .terminal-content { padding: 3rem; font-family: 'Courier New', monospace; }
+
+        .command-prompt { color: var(--primary); font-size: 1.5rem; margin-bottom: 2.5rem; text-shadow: 0 0 8px var(--primary); }
+
+        .profile-section { display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; }
+
+        .profile-image { width: 200px; height: 200px; border-radius: 50%; border: 5px solid var(--primary); object-fit: cover; box-shadow: var(--glow); transition: var(--transition); }
+
+        .profile-image:hover { transform: rotate(8deg) scale(1.1); box-shadow: 0 0 30px rgba(0, 255, 204, 0.8); }
+
+        .bio-text { font-size: 1.2rem; color: var(--text); }
+
+        .bio-text span { color: var(--primary); font-weight: 700; text-shadow: 0 0 8px var(--primary); }
+
+        .visitor-info, .time-calendar { margin-top: 2.5rem; font-size: 1.2rem; }
+
+        .time-display, .kerala-calendar { color: var(--primary); font-weight: 600; }
+
+        @media (max-width: 768px) {
+            .hero { padding: 2rem 0; }
+            .terminal-window { padding: 1.5rem; max-width: 100%; }
+            .profile-section { flex-direction: column; gap: 1.5rem; }
+            .profile-image { width: 120px; height: 120px; }
+            .bio-text { font-size: 0.9rem; }
+        }
+
+        @media (max-width: 480px) {
+            .terminal-content { padding: 1rem; }
+            .terminal-title { font-size: 1.2rem; }
+            .command-prompt { font-size: 1.2rem; }
+            .profile-image { width: 100px; height: 100px; }
+        }
+
+        .section { padding: 7rem 0; position: relative; z-index: 1; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 255, 204, 0.05)); }
+
+        .section h2 {
+            color: var(--primary);
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 4rem;
+            text-shadow: var(--glow);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGlow 2s infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 10px var(--primary); }
+            100% { text-shadow: 0 0 20px var(--secondary); }
+        }
+
+        .live-updates-section {
+            padding: 7rem 0;
+            background: linear-gradient(145deg, #141c2f, #0a0e17);
+        }
+
+        .updates-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .update-card {
+            background: linear-gradient(135deg, var(--card-bg), #2e3950);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px solid rgba(0, 255, 204, 0.3);
+        }
+
+        .update-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        .update-card h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 5px var(--primary);
+        }
+
+        .update-card p, .update-card ul {
+            font-size: 1.2rem;
+            color: var(--text);
+        }
+
+        .update-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .update-card ul li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 255, 204, 0.1);
+        }
+
+        @media (max-width: 1024px) {
+            .updates-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .updates-grid { grid-template-columns: 1fr; }
+            .update-card { padding: 1.5rem; }
+            .update-card h3 { font-size: 1.5rem; }
+            .update-card p, .update-card ul { font-size: 1rem; }
+        }
+
+        .coffee-section {
+            padding: 5rem 0;
+            background: linear-gradient(145deg, #0a0e17, #1b2536);
+        }
+
+        .coffee-card {
+            background: linear-gradient(135deg, var(--card-bg), #2e3950);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid rgba(0, 255, 204, 0.3);
+            transition: var(--transition);
+        }
+
+        .coffee-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        .coffee-content p { font-size: 1.3rem; margin-bottom: 1.5rem; }
+
+        .coffee-price { color: var(--primary); font-weight: 700; text-shadow: 0 0 8px var(--primary); }
+
+        .upi-details { margin: 1.5rem 0; font-size: 1.2rem; }
+
+        .upi-details #upiId { color: var(--primary); font-family: 'Courier New', monospace; }
+
+        .qr-code-container {
+            margin: 1.5rem auto;
+            padding: 1rem;
+            background: var(--game-bg);
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .coffee-button { margin-top: 1.5rem; padding: 1rem 2rem; font-size: 1.2rem; }
+
+        .tool-button {
+            padding: 0.8rem 1.8rem;
+            border: none;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: var(--bg-dark);
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: var(--transition);
+            box-shadow: var(--glow);
+        }
+
+        .tool-button:hover {
+            transform: scale(1.1);
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.8);
+        }
+
+        .thank-you-message {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(0, 255, 204, 0.1);
+            border-radius: 10px;
+            color: var(--primary);
+            font-size: 1.3rem;
+            text-shadow: 0 0 8px var(--primary);
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .coffee-card { padding: 2rem; max-width: 100%; }
+            .coffee-content p, .upi-details { font-size: 1.1rem; }
+            .coffee-button { padding: 0.8rem 1.5rem; font-size: 1rem; }
+            .thank-you-message { font-size: 1.1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .coffee-card { padding: 1.5rem; }
+            .coffee-content p, .upi-details { font-size: 1rem; }
+            .coffee-button { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
+            .thank-you-message { font-size: 1rem; padding: 1rem; }
+        }
+
+        .footer { background: linear-gradient(135deg, var(--card-bg), #2e3950); padding: 3rem; text-align: center; border-top: 2px solid rgba(0, 255, 204, 0.2); box-shadow: var(--shadow); }
+
+        .footer p { font-size: 1.2rem; color: var(--text); }
+
+        @media (max-width: 480px) { .footer p { font-size: 1rem; } }
+    </style>
+</head>
+
+<body>
+    <div id="particles-js"></div>
+    <br><br><br><br>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">Aswinkl71</div>
+            <button class="nav-toggle" onclick="toggleNav()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="{% url 'index' %}"><i class="fas fa-home"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'instagram_downloader' %}"><i class="fas fa-download"></i> Instagram Downloader</a>
+                </li>
+                {% for nav_category in nav_categories %}
+                    <li class="nav-item">
+                        {% if nav_category.main == 'Python' %}
+                            <a href="#"><i class="fab fa-python"></i> Python</a>
+                        {% elif nav_category.main == 'Ionic' %}
+                            <a href="#"><i class="fas fa-mobile-alt"></i> Ionic</a>
+                        {% elif nav_category.main == 'Node' %}
+                            <a href="#"><i class="fab fa-node"></i> Node</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-button close"></div>
+                    <div class="terminal-button minimize"></div>
+                    <div class="terminal-button maximize"></div>
+                    <div class="terminal-title">visitor@aswinkl71:~$</div>
+                </div>
+                <div class="terminal-content">
+                    <div class="command-prompt">$ whoami</div>
+                    <div class="profile-section">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpXheMMz-jY8TFSvkxYVjEznIt-Q6FvZsAcA&s" alt="Aswinkl71 Profile" class="profile-image">
+                        <div class="bio-text">
+                            <span>Hey there!</span><br><br>
+                            <span>⦾</span> YouTube Content Creator (Aswinkl71) - From Noob to Ninja.<br>
+                            <span>⦾</span> Python Django Developer solving real-world challenges.<br>
+                            <span>⦾</span> Cybersecurity Enthusiast exploring the digital frontier.
+                        </div>
+                    </div>
+                    <div class="visitor-info" id="visitorInfo">
+                        <p>$ visitor-info</p>
+                        <p id="ipDetails">Fetching your details...</p>
+                    </div>
+                    <div class="time-calendar">
+                        <p>$ time-info</p>
+                        <div class="time-display" id="realTimeClock"></div>
+                        <div class="kerala-calendar" id="keralaCalendar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section live-updates-section">
+        <div class="container">
+            <h2>Live Updates - Kerala</h2>
+            <div class="updates-grid">
+                <div class="update-card">
+                    <h3>Today's Gold Rate (Kerala)</h3>
+                    <div id="goldRate">
+                        <p>22K Gold (1 gram): {{ gold_rates.22k }}</p>
+                        <p>24K Gold (1 gram): {{ gold_rates.24k }}</p>
+                        <p>Last Updated: {% now "H:i:s" %}</p>
+                    </div>
+                </div>
+                <div class="update-card">
+                    <h3>Today's Rubber Rate (Kerala)</h3>
+                    <div id="rubberRate">
+                        <p>RSS4: {{ rubber_rates.rss4 }}</p>
+                        <p>RSS5: {{ rubber_rates.rss5 }}</p>
+                        <p>Last Updated: {% now "H:i:s" %}</p>
+                    </div>
+                </div>
+                <div class="update-card">
+                    <h3>Kerala Lottery Results (Today)</h3>
+                    <div id="lotteryResults">
+                        <ul>
+                            {% for result in lottery_results %}
+                                <li>{{ result }}</li>
+                            {% empty %}
+                                <li>No results available</li>
+                            {% endfor %}
+                        </ul>
+                        <p>Last Updated: {% now "H:i:s" %}</p>
+                    </div>
+                </div>
+                <div class="update-card">
+                    <h3>Weather Report (Current Location)</h3>
+                    <div id="weatherReport">Fetching weather data...</div>
+                </div>
+                <div class="update-card">
+                    <h3>Trending News (Kerala)</h3>
+                    <div id="trendingNews">Fetching trending news...</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section coffee-section">
+        <div class="container">
+            <h2>Buy Me a Coffee</h2>
+            <div class="coffee-card">
+                <div class="coffee-content">
+                    <p>Enjoying my tools and content? Support me by buying me a coffee for just <span class="coffee-price">₹50</span> via GPay!</p>
+                    <div class="upi-details">
+                        <p><strong>UPI ID:</strong> <span id="upiId">aswinappukarad1234@okicici</span></p>
+                        <button class="tool-button" onclick="copyUpiId()">Copy UPI ID</button>
+                    </div>
+                    <div class="qr-code-container" id="coffeeQrCode"></div>
+                    <button class="tool-button coffee-button" onclick="simulatePayment()">I’ve Paid ₹50</button>
+                    <div class="thank-you-message" id="thankYouMessage" style="display: none;">
+                        <p>Thank you so much for the coffee! ☕ Your support means a lot!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Aswinkl71. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 100, density: { enable: true, value_area: 1200 } },
+                color: { value: '#00ffcc' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.6, random: true },
+                size: { value: 5, random: true },
+                line_linked: { enable: true, distance: 180, color: '#00ffcc', opacity: 0.5, width: 1.5 },
+                move: { enable: true, speed: 4, direction: 'none', random: false, straight: false, out_mode: 'out' }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 150 }, push: { particles_nb: 6 } }
+            },
+            retina_detect: true
+        });
+
+        function toggleNav() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from(".navbar", { y: -100, opacity: 0, duration: 1, ease: "power3.out" });
+        gsap.from(".hero", { opacity: 0, y: 50, duration: 1.5, delay: 0.5, ease: "power4.out" });
+        gsap.from(".section", { opacity: 0, y: 40, duration: 1, stagger: 0.4, scrollTrigger: { trigger: ".section", start: "top 75%" } });
+        gsap.from(".update-card", { opacity: 0, scale: 0.8, duration: 0.8, stagger: 0.2, scrollTrigger: { trigger: ".live-updates-section", start: "top 75%" } });
+
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('ipDetails').innerHTML = `
+                    IP: ${data.ip} | City: ${data.city} | Region: ${data.region} | Country: ${data.country_name}
+                `;
+            })
+            .catch(() => document.getElementById('ipDetails').innerHTML = 'Unable to fetch details.');
+
+        function updateClockAndCalendar() {
+            const now = new Date();
+            const options = { timeZone: 'Asia/Kolkata', hour12: false };
+            const timeString = now.toLocaleTimeString('en-IN', options);
+            const dateString = now.toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            const malayalamYear = now.getFullYear() - 825;
+            const malayalamMonths = ['Chingam', 'Kanni', 'Thulam', 'Vrishchikam', 'Dhanu', 'Makaram', 'Kumbham', 'Meenam', 'Medam', 'Idavam', 'Mithunam', 'Karkidakam'];
+            const malayalamMonth = malayalamMonths[now.getMonth()];
+
+            document.getElementById('realTimeClock').innerHTML = `${timeString} | ${dateString}`;
+            document.getElementById('keralaCalendar').innerHTML = `${malayalamMonth} ${now.getDate()}, ${malayalamYear} (Kollam Era)`;
+        }
+
+        setInterval(updateClockAndCalendar, 1000);
+        updateClockAndCalendar();
+
+        // Fetch Weather Report
+        function fetchWeatherReport() {
+            const weatherDiv = document.getElementById('weatherReport');
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const { latitude, longitude } = position.coords;
+                    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=YOUR_OPENWEATHERMAP_API_KEY&units=metric`)
+                        .then(response => response.json())
+                        .then(data => {
+                            weatherDiv.innerHTML = `
+                                Location: ${data.name}<br>
+                                Temperature: ${data.main.temp}°C<br>
+                                Weather: ${data.weather[0].description}<br>
+                                Humidity: ${data.main.humidity}%<br>
+                                Last Updated: ${new Date().toLocaleTimeString()}
+                            `;
+                        })
+                        .catch(() => {
+                            weatherDiv.innerHTML = 'Error fetching weather data. Replace YOUR_OPENWEATHERMAP_API_KEY.';
+                        });
+                }, () => {
+                    weatherDiv.innerHTML = 'Location denied. Default (Kochi):<br>Temperature: 28°C<br>Weather: Partly cloudy';
+                });
+            } else {
+                weatherDiv.innerHTML = 'Geolocation not supported.';
+            }
+        }
+
+        // Fetch Trending News (simulated or replace with real source)
+        function fetchTrendingNews() {
+            const newsDiv = document.getElementById('trendingNews');
+            // Placeholder: Replace with actual news source scraping or API
+            newsDiv.innerHTML = `
+                <ul>
+                    <li><a href="#" target="_blank">Kerala Flood Warning - ${new Date().toLocaleTimeString()}</a></li>
+                    <li><a href="#" target="_blank">IT Park Opens in Kochi - ${new Date().toLocaleTimeString()}</a></li>
+                </ul>
+                <small>Note: Simulated data. Add real news source in views.py.</small>
+            `;
+        }
+
+        window.onload = function() {
+            const upiId = "aswinappukarad1234@okicici";
+            const qrContainer = document.getElementById('coffeeQrCode');
+            new QRCode(qrContainer, {
+                text: `upi://pay?pa=${upiId}&pn=Aswinkl71&am=50&cu=INR`,
+                width: 150,
+                height: 150,
+                colorDark: "#00ffcc",
+                colorLight: "#0a0e17"
+            });
+            updateClockAndCalendar();
+            fetchWeatherReport();
+            fetchTrendingNews();
+            // Note: Lottery, Gold, Rubber rates are server-side rendered
+        };
+
+        function copyUpiId() {
+            const upiId = document.getElementById('upiId').textContent;
+            navigator.clipboard.writeText(upiId).then(() => alert('UPI ID copied: ' + upiId));
+        }
+
+        function simulatePayment() {
+            const thankYouMessage = document.getElementById('thankYouMessage');
+            thankYouMessage.style.display = 'block';
+            document.querySelector('.coffee-button').style.display = 'none';
+            gsap.fromTo('#thankYouMessage', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
+        }
+    </script>
+</body>
+</html>

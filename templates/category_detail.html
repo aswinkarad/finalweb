@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Blog Template</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<style>
+:root {
+  --primary: #00ff00;
+  --bg-dark: #1a1a1a;
+  --text: #e0e0e0;
+  --card-bg: #242424;
+  --shadow-color: rgba(0, 255, 0, 0.1);
+  --navbar-height: 70px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar Styles */
+.navbar {
+  background: rgba(26, 26, 26, 0.95);
+  backdrop-filter: blur(10px);
+  height: var(--navbar-height);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo i {
+  font-size: 1.8rem;
+}
+
+/* Search Bar Styles */
+.search-container {
+  position: relative;
+  margin-left: auto;
+  margin-right: 2rem;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  background: var(--card-bg);
+  border: 1px solid rgba(0, 255, 0, 0.2);
+  border-radius: 20px;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  color: var(--text);
+  font-size: 0.9rem;
+  width: 250px;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(0, 255, 0, 0.1);
+  width: 300px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+.search-submit {
+  background: var(--primary);
+  color: var(--bg-dark);
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.search-submit:hover {
+  background: #00cc00;
+  transform: translateY(-1px);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-item a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.nav-item a:hover {
+  color: var(--primary);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--card-bg);
+  min-width: 200px;
+  border-radius: 8px;
+  padding: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+.nav-item:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.8rem 1rem;
+  display: block;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background: rgba(0, 255, 0, 0.1);
+  color: var(--primary);
+}
+
+/* Main Content Styles */
+.main-content {
+  flex: 1;
+  margin-top: var(--navbar-height);
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 255, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px var(--shadow-color);
+  border-color: var(--primary);
+}
+
+.card-title {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-subtitle {
+  color: var(--text);
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.meta-item i {
+  color: var(--primary);
+}
+
+/* Footer Styles */
+.footer {
+  background: var(--card-bg);
+  padding: 3rem 0;
+  margin-top: auto;
+  border-top: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-title {
+  color: var(--primary);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.footer-links a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-links a:hover {
+  color: var(--primary);
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links a {
+  color: var(--text);
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--primary);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .search-container {
+    margin-right: 1rem;
+  }
+  
+  .search-input {
+    width: 200px;
+  }
+  
+  .search-input:focus {
+    width: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: var(--navbar-height);
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - var(--navbar-height));
+    background: var(--card-bg);
+    flex-direction: column;
+    padding: 2rem;
+    transition: left 0.3s ease;
+  }
+
+  .nav-links.active {
+    left: 0;
+  }
+
+  .search-container {
+    order: -1;
+    margin: 1rem 0;
+    width: 100%;
+  }
+
+  .search-form {
+    width: 100%;
+  }
+
+  .search-input,
+  .search-input:focus {
+    width: 100%;
+  }
+
+  .dropdown-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    border: none;
+    padding-left: 1rem;
+    display: none;
+  }
+
+  .nav-item:hover .dropdown-menu {
+    display: block;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="{% url 'index' %}" class="logo">
+        <i class="fas fa-code"></i>
+        Aswinkl71
+      </a>
+      
+      <!-- Search Bar -->
+      <div class="search-container">
+        <form action="{% url 'category_detail' category.id %}" method="GET" class="search-form" id="search-form">
+          <i class="fas fa-search search-icon"></i>
+          <input 
+            type="search" 
+            name="q" 
+            class="search-input" 
+            placeholder="Search in {{ category.name }}..."
+            value="{{ search_query }}"
+            id="search-input"
+          >
+          <button type="submit" class="search-submit">Search</button>
+        </form>
+      </div>
+
+      <button class="nav-toggle" onclick="toggleNav()">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <ul class="nav-links">
+        <li class="nav-item">
+          <a href="{% url 'index' %}">
+            <i class="fas fa-home"></i>
+            Home
+          </a>
+        </li>
+        {% for nav_category in nav_categories %}
+        <li class="nav-item">
+          <a href="#">
+            {% if nav_category.main == 'Python' %}
+            <i class="fab fa-python"></i>
+            {% elif nav_category.main == 'Ionic' %}
+            <i class="fas fa-mobile-alt"></i>
+            {% elif nav_category.main == 'Node' %}
+            <i class="fab fa-node"></i>
+            {% endif %}
+            {{ nav_category.main }}
+          </a>
+          {% if nav_category.subcategories %}
+          <ul class="dropdown-menu">
+            {% for subcat in nav_category.subcategories %}
+            <li>
+              <a href="{% url 'category_detail' subcat.id %}" class="dropdown-item">
+                {{ subcat.name }}
+                <span>({{ subcat.posts.count }})</span>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <div class="grid">
+        {% for post in posts %}
+        <article class="card">
+          <h2 class="card-title">
+            <a href="{% url 'post_detail' post.id %}">{{ post.name }}</a>
+          </h2>
+          <p class="card-subtitle">{{ post.sub_heading }}</p>
+          <div class="card-meta">
+            <span class="meta-item">
+              <i class="fas fa-star"></i>
+              {{ post.avg_rating|default:"No ratings" }}
+            </span>
+            <span class="meta-item">
+              <i class="fas fa-comments"></i>
+              {{ post.comment_count }}
+            </span>
+            <span class="meta-item">
+              <i class="fas fa-calendar"></i>
+              {{ post.created_at|date:"M d, Y" }}
+            </span>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3 class="footer-title">About</h3>
+        <p>Tech blog focusing on Python, Ionic, and Node.js development. Sharing knowledge and experiences in programming.</p>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Python Tutorials</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Ionic Development</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Node.js Guides</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Connect</h3>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Aswinkl71. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    }
+
+    // GSAP Animations
+    gsap.from(".navbar", {
+      duration: 1,
+      y: -100,
+      opacity: 0,
+      ease: "power3.out"
+    });
+
+    gsap.from(".card", {
+      duration: 0.8,
+      y: 50,
+      opacity: 0,
+      stagger: 0.2,
+      ease: "power3.out"
+    });
+
+    // Optional: Dynamic Search with AJAX
+    document.getElementById('search-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const searchQuery = document.getElementById('search-input').value;
+      const categoryId = {{ category.id }};
+      
+      fetch(`/category/${categoryId}/search?q=${searchQuery}`)
+        .then(response => response.json())
+        .then(data => {
+          const grid = document.querySelector('.grid');
+          grid.innerHTML = ''; // Clear existing posts
+          
+          data.posts.forEach(post => {
+            const card = document.createElement('article');
+            card.className = 'card';
+            card.innerHTML = `
+              <h2 class="card-title">
+                <a href="/post/${post.id}">${post.name}</a>
+              </h2>
+              <p class="card-subtitle">${post.sub_heading}</p>
+              <div class="card-meta">
+                <span class="meta-item">
+                  <i class="fas fa-star"></i>
+                  ${post.avg_rating || 'No ratings'}
+                </span>
+                <span class="meta-item">
+                  <i class="fas fa-comments"></i>
+                  ${post.comment_count}
+                </span>
+                <span class="meta-item">
+                  <i class="fas fa-calendar"></i>
+                  ${new Date(post.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                </span>
+              </div>
+            `;
+            grid.appendChild(card);
+          });
+        })
+        .catch(error => console.error('Error fetching search results:', error));
+    });
+  </script>
+</body>
+</html>
